@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Send, Sparkles } from "lucide-react";
+import { Send, CheckCircle, Home, Sparkles } from "lucide-react";
 import { send } from "@emailjs/browser";
+import { useNavigate } from "react-router-dom";
 
 const ContactForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,29 +17,13 @@ const ContactForm = () => {
     company: "",
     message: "",
   });
-  const [step, setStep] = useState<"form" | "countdown" | "thankyou">("form");
-  const [count, setCount] = useState(3);
   const [sending, setSending] = useState(false);
+  const [submitted, setSubmitted] = useState(false); // track submission
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStep("countdown");
     setSending(true);
 
-    // Start countdown
-    setCount(3);
-
-    const countdownInterval = setInterval(() => {
-      setCount((prev) => {
-        if (prev === 1) {
-          clearInterval(countdownInterval);
-          setStep("thankyou");
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    // Send email in background
     try {
       await send(
         "service_duxnlp8",
@@ -52,6 +38,7 @@ const ContactForm = () => {
         company: "",
         message: "",
       });
+      setSubmitted(true); // show Thank You
     } catch (error) {
       console.error(error);
       toast.error("Failed to send message.");
@@ -60,51 +47,88 @@ const ContactForm = () => {
     }
   };
 
-  // --- COUNTDOWN PAGE ---
-  if (step === "countdown") {
+  // --- THANK YOU SCREEN ---
+  if (submitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 text-white text-center">
-        <motion.div
-          key={count}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1.5, opacity: 1 }}
-          exit={{ scale: 0, opacity: 0 }}
-          transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
-          className="text-8xl md:text-9xl font-bold"
-        >
-          {count > 0 ? count : ""}
-        </motion.div>
-      </div>
-    );
-  }
+      <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
+        {/* Animated background */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl animate-float" />
+          <div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl animate-float"
+            style={{ animationDelay: "1s" }}
+          />
+        </div>
 
-  // --- THANK YOU PAGE ---
-  if (step === "thankyou") {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 text-white p-6">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <Sparkles className="w-16 h-16 mx-auto mb-4 animate-bounce" />
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-2">🎉 Thank You!</h1>
-          <p className="text-lg md:text-xl mb-6">
-            We received your message and will get back to you fast 🚀
-          </p>
-          <Button
-            className="bg-white text-black font-bold px-6 py-3 rounded-full"
-            onClick={() => setStep("form")}
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mx-auto text-center p-12 rounded-3xl bg-card border-2 border-primary/30 glow-strong"
           >
-            Back to Form
-          </Button>
-        </motion.div>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2, type: "spring", stiffness: 200 }}
+              className="mx-auto mb-8 w-24 h-24 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center glow-strong"
+            >
+              <CheckCircle className="w-12 h-12 text-background" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+            >
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium gradient-text">Success!</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-4xl md:text-5xl font-bold mb-6"
+            >
+              <span className="gradient-text">Awesome!</span> Your AI System Audit is Booked
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-xl text-muted-foreground mb-10"
+            >
+              We'll reach out soon to discuss how we can transform your coaching business with AI automation.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button
+                size="lg"
+                onClick={() => {
+                  setSubmitted(false); // go back to form
+                }}
+                className="bg-gradient-to-r from-primary to-secondary text-background font-semibold px-10 py-6 text-lg glow-strong hover:glow-strong transition-all"
+              >
+                <Home className="mr-2 w-5 h-5" />
+                Back to Form
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
     );
   }
 
-  // --- FORM PAGE ---
+  // --- FORM SCREEN ---
   return (
     <section className="min-h-screen bg-background flex items-center justify-center p-6">
       <motion.form

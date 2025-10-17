@@ -7,6 +7,7 @@ import Services from "@/components/Services";
 import Process from "@/components/Process";
 import WhyLumoscale from "@/components/WhyLumoscale";
 import Pricing from "@/components/Pricing";
+import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
@@ -22,6 +23,7 @@ const Index = () => {
       <Process />
       <WhyLumoscale />
       <Pricing />
+      <FAQ />
       <FinalCTA />
       <Footer />
     </div>
