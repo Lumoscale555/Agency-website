@@ -4,23 +4,27 @@ import { MessageSquare, Workflow, BarChart3, Boxes } from "lucide-react";
 const services = [
   {
     icon: MessageSquare,
-    title: "AI Chat & Voice Assistants",
-    description: "Intelligent chatbots and voice agents that handle customer inquiries, provide instant support, and engage users 24/7 with natural conversations.",
+    title: "Qualified Lead Systems",
+    description:
+      "AI that scores, nurtures, and books only the most relevant discovery calls, so you talk exclusively to perfect-fit prospects.",
   },
   {
     icon: Workflow,
-    title: "AI Workflow Automation",
-    description: "Automate repetitive tasks across sales, support, and operations. Connect all tools into one seamless system to save time, reduce errors, and boost efficiency. Let AI handle the repetitive work while you focus on strategy.",
+    title: "AI Voice & Chat Agents",
+    description:
+      "Intelligent chatbots and voice assistants that engage leads, answer questions, and schedule calls automatically, 24/7.",
   },
   {
     icon: BarChart3,
-    title: "AI Data Insights",
-    description: "Summarize emails, reports, and documents instantly. Highlight trends, uncover opportunities, and make smarter, faster business decisions.",
+    title: "Custom AI Automations",
+    description:
+      "Tailored backend workflows that eliminate repetitive tasks, integrate seamlessly with your systems, and save hours every week.",
   },
   {
     icon: Boxes,
-    title: "Custom AI Workflows",
-    description: "Tailored automation solutions designed specifically for your unique business needs. We build exactly what you need, integrated perfectly with your systems.",
+    title: "Enterprise Consulting",
+    description:
+      "Strategy and integration to scale AI lead qualification, automate workflows, and optimize your sales process across your business.",
   },
 ];
 
@@ -31,7 +35,7 @@ const sparkleVariants = {
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 bg-card/20 relative overflow-hidden">
+    <section id="services" className="py-24 bg-black relative overflow-hidden">
       {/* Background sparkles */}
       <motion.div
         className="absolute top-0 left-0 w-full h-full pointer-events-none"
@@ -49,7 +53,12 @@ const Services = () => {
             }}
             variants={sparkleVariants}
             animate="animate"
-            transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, repeatType: "mirror", delay: Math.random() * 2 }}
+            transition={{
+              duration: 2 + Math.random() * 3,
+              repeat: Infinity,
+              repeatType: "mirror",
+              delay: Math.random() * 2,
+            }}
           />
         ))}
       </motion.div>
@@ -63,11 +72,12 @@ const Services = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
             What We <span className="gradient-text">Build For You</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Comprehensive AI solutions tailored to transform your business operations
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            AI solutions that book qualified discovery calls, automate follow-ups,
+            and streamline your business so you can focus on growth.
           </p>
         </motion.div>
 
@@ -89,7 +99,7 @@ const Services = () => {
                 whileHover={{ scale: 1.1 }}
               />
 
-              <div className="relative bg-background border border-border rounded-2xl p-8 hover:border-primary/50 transition-all h-full overflow-hidden">
+              <div className="relative bg-zinc-900 border border-zinc-700 rounded-2xl p-8 hover:border-primary/50 transition-all h-full overflow-hidden">
                 <motion.div
                   className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center mb-6 group-hover:from-yellow-400 group-hover:to-pink-400 transition-all"
                   whileHover={{ scale: 1.2, rotate: [0, -15, 15, 0] }}
@@ -98,8 +108,12 @@ const Services = () => {
                   <service.icon className="w-8 h-8 text-primary group-hover:text-white transition-colors" />
                 </motion.div>
 
-                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                <h3 className="text-2xl font-bold mb-4 text-white">
+                  {service.title}
+                </h3>
+                <p className="text-gray-400 leading-relaxed">
+                  {service.description}
+                </p>
 
                 {/* Floating sparkles */}
                 {[...Array(5)].map((_, i) => (
@@ -111,7 +125,11 @@ const Services = () => {
                       left: `${Math.random() * 100}%`,
                     }}
                     animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 + Math.random() * 1.5, delay: Math.random() * 0.5 }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 1.5 + Math.random() * 1.5,
+                      delay: Math.random() * 0.5,
+                    }}
                   />
                 ))}
               </div>

@@ -4,22 +4,22 @@ import { Clock, Unplug, TrendingDown } from "lucide-react";
 
 const problems = [
   {
-    icon: Clock,
-    title: "Wasted Time on Repetitive Tasks",
+    icon: Unplug,
+    title: "📞 Too Many Unqualified Calls",
     description:
-      "Your team spends countless hours on manual data entry, scheduling, follow-ups, and other repetitive work that drains productivity and creativity.",
+      "You’re doing 10–15 discovery calls per week, but only 2–3 actually close. The rest are tire-kickers, wrong budget, or just browsing — wasting 8–10 hours weekly.",
   },
   {
-    icon: Unplug,
-    title: "Disconnected Tools & Workflows",
+    icon: Clock,
+    title: "⏰ Manual Follow-Up - Killing                You",
     description:
-      "Critical information is scattered across multiple platforms. Tools that don’t communicate create mistakes, slow processes, and endless frustration.",
+      "Leads slip through because follow-ups are inconsistent. You know warm prospects need nurturing, but there’s never enough time.",
   },
   {
     icon: TrendingDown,
-    title: "Missed Opportunities & Slow Growth",
+    title: "🎯 Scaling Feels Impossible",
     description:
-      "Manual workflows create bottlenecks. Leads are lost, deals take longer, and scaling the business becomes a constant struggle.",
+      "Without automation, your calendar fills with unqualified calls, leaving no room to grow or focus on high-value clients.",
   },
 ];
 
@@ -38,7 +38,7 @@ const Problem = () => {
             The Problems <span className="gradient-text">Holding You Back</span>
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-           Most businesses don’t realize how much time, energy, and money is lost to repetitive work — until it’s automated.
+          Most founders and coaches don’t realize how much time, money, and energy slips away to repetitive tasks — until AI takes over.
           </p>
         </motion.div>
 

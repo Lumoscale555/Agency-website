@@ -7,7 +7,6 @@ const comparisons = [
   { feature: "Training", icon: Shield },
   { feature: "No Fixed Packages", icon: TrendingUp },
   { feature: "End-to-End", icon: Users },
-  { feature: "Growth", icon: Award },
 ];
 
 const WhyLumoscale = () => {

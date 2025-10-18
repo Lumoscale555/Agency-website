@@ -4,18 +4,18 @@ import { Brain, Link2, TrendingUp } from "lucide-react";
 const solutions = [
   {
     icon: Brain,
-    title: "Tailored AI Agents",
-    description: "Custom-built AI assistants designed specifically for your business needs. They learn your processes and work exactly the way you need them to.",
+    title: "AI That Only Works for You",
+    description: "Custom AI agents qualify leads, nurture prospects, and book discovery calls automatically so you never waste time on tire-kickers..",
   },
   {
     icon: Link2,
-    title: "Seamless Integration",
-    description: "Connect all your existing tools and platforms effortlessly. Our solutions work with what you already use, creating a unified workflow ecosystem.",
+    title: "All Your Tools, One System",
+    description: "Our AI handles your entire lead journey, qualifying prospects, booking discovery calls, and managing follow-ups so your business runs smoothly 24/7.",
   },
   {
     icon: TrendingUp,
-    title: "Measurable Impact",
-    description: "Track real results with clear metrics. See how automation saves time, reduces costs, and drives growth with detailed analytics and reporting.",
+    title: "Results You Can Measure",
+    description: "Track qualified calls booked, time saved, and revenue growth with clear analytics — see exactly how automation transforms your business.",
   },
 ];
 
@@ -53,7 +53,9 @@ const Solution = () => {
             Our <span className="gradient-text">AI-Powered Solution</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Transform your business with intelligent automation that actually works
+            We built a system that qualifies leads 24/7, books only 
+perfect-fit prospects on your calendar, and handles all 
+the follow-up automatically.
           </p>
         </motion.div>
 

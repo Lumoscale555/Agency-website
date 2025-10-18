@@ -8,26 +8,36 @@ const Pricing = () => {
   };
 
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0">
+    <section id="pricing" className="py-24 relative overflow-hidden bg-background">
+      {/* Background neon glow */}
+      <div className="absolute inset-0 flex justify-center items-center z-0 pointer-events-none">
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10"
+          className="w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle, hsl(190, 100%, 50%), transparent)",
+            background: "conic-gradient(from 0deg, hsl(190,100%,50% / 0.3), hsl(75,100%,50% / 0.3))",
+            filter: "blur(120px)",
           }}
-          animate={{
-            scale: [1, 1.3, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
         />
       </div>
 
+      {/* Floating sparkles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-2 h-2 rounded-full bg-white"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 + Math.random() * 1.5, delay: Math.random() * 0.5 }}
+        />
+      ))}
+
       <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +63,7 @@ const Pricing = () => {
             whileHover={{ y: -10 }}
             className="relative group"
           >
-            {/* NEW Badge */}
+            {/* Badge */}
             <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20">
               <motion.span
                 animate={{ rotate: [0, 20, -20, 0] }}
@@ -67,7 +77,7 @@ const Pricing = () => {
 
             <div className="relative bg-gradient-to-br from-card via-card/95 to-card/90 border-2 border-primary rounded-3xl p-12 shadow-[0_0_60px_rgba(0,217,255,0.3)] overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-              
+
               <div className="relative z-10 text-center">
                 <motion.div
                   animate={{ scale: [1, 1.05, 1] }}
@@ -83,6 +93,7 @@ const Pricing = () => {
                   We analyze your workflows, estimate the scope, and create a custom package that fits your business perfectly.
                 </p>
 
+                {/* Features */}
                 <div className="grid md:grid-cols-3 gap-6 mb-10">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -150,6 +161,7 @@ const Pricing = () => {
             </div>
           </motion.div>
 
+          {/* Questions */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

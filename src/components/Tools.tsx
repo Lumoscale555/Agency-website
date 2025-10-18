@@ -1,20 +1,20 @@
 import { motion } from "framer-motion";
 
 const tools = [
-  { name: "n8n", icon: " " },  // n8n icon
   { name: "Telegram", icon: "https://img.icons8.com/color/48/000000/telegram-app.png" },
   { name: "WhatsApp", icon: "https://img.icons8.com/color/48/000000/whatsapp.png" },
   { name: "Zapier", icon: "https://img.icons8.com/color/48/000000/zapier.png" },
-  { name: "OpenAI", icon: "https://img.icons8.com/color/48/000000/chatgpt.png" }, // ChatGPT / OpenAI icon
+  { name: "OpenAI", icon: "https://img.icons8.com/color/48/000000/chatgpt.png" },
   { name: "Slack", icon: "https://img.icons8.com/color/48/000000/slack-new.png" },
   { name: "Gmail", icon: "https://img.icons8.com/color/48/000000/gmail.png" },
   { name: "Notion", icon: "https://img.icons8.com/color/48/000000/notion.png" },
-  { name: "Airtable", icon: "https://img.icons8.com/color/48/000000/airtable.png" },
   { name: "Google Drive", icon: "https://img.icons8.com/color/48/000000/google-drive.png" },
   { name: "Google Sheets", icon: "https://img.icons8.com/color/48/000000/google-sheets.png" },
   { name: "Gemini AI", icon: "https://img.icons8.com/color/48/000000/gemini-ai.png" },
+  { name: "LinkedIn", icon: "https://img.icons8.com/color/48/000000/linkedin.png" },
+  { name: "Facebook", icon: "https://img.icons8.com/color/48/000000/facebook-new.png" },
+  { name: "Lovable", icon: "https://img.icons8.com/color/48/000000/heart.png" },
 ];
-
 
 const Tools = () => {
   return (
@@ -30,10 +30,10 @@ const Tools = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-            Connect all tools into one <span className="gradient-text">smooth system</span>
+            Unify Your AI Stack Into <span className="gradient-text">One Smart System</span>
           </h2>
           <p className="text-muted-foreground text-lg font-body">
-            Connect with your favorite tools and let AI handle the rest.
+            All your tools. One smart, automated system..
           </p>
         </motion.div>
 
@@ -55,9 +55,9 @@ const Tools = () => {
               <motion.div
                 className="w-20 h-20 rounded-2xl bg-card border border-border flex items-center justify-center transition-all shadow-md hover:shadow-[0_0_25px_rgba(0,217,255,0.6)] hover:border-primary"
                 animate={{
-                  y: [0, -10, 0, 10, 0], // floating
-                  rotate: [0, 5, -5, 5, 0], // gentle rotation
-                  scale: [1, 1.05, 1], // subtle pulsing
+                  y: [0, -10, 0, 10, 0],
+                  rotate: [0, 5, -5, 5, 0],
+                  scale: [1, 1.05, 1],
                 }}
                 transition={{
                   duration: 4,

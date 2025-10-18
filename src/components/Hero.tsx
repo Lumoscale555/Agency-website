@@ -1,9 +1,9 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 const Hero = () => {
-  // Smooth scroll helper
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -11,39 +11,53 @@ const Hero = () => {
     }
   };
 
+  const phrases = ["Gets Results", "Drives ROI", "15+ Calls Booked/Month"];
+  const [text, setText] = useState("");
+  const [charIndex, setCharIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  useEffect(() => {
+    const currentPhrase = phrases[phraseIndex];
+    const speed = 120; // normal speed
+
+    let timeout: NodeJS.Timeout;
+
+    if (!deleting && charIndex < currentPhrase.length) {
+      timeout = setTimeout(() => {
+        setText(currentPhrase.slice(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+      }, speed);
+    } else if (!deleting && charIndex === currentPhrase.length) {
+      setDeleting(true);
+    } else if (deleting && charIndex > 0) {
+      timeout = setTimeout(() => {
+        setText(currentPhrase.slice(0, charIndex - 1));
+        setCharIndex(charIndex - 1);
+      }, speed);
+    } else if (deleting && charIndex === 0) {
+      setDeleting(false);
+      setPhraseIndex((prev) => (prev + 1) % phrases.length);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, deleting, phraseIndex]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated background */}
+      {/* Bubble Background */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-20"
-          style={{
-            background: "radial-gradient(circle, hsl(190, 100%, 50%), transparent)",
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          style={{ background: "radial-gradient(circle, hsl(190, 100%, 50%), transparent)" }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full opacity-20"
-          style={{
-            background: "radial-gradient(circle, hsl(75, 100%, 50%), transparent)",
-          }}
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          style={{ background: "radial-gradient(circle, hsl(75, 100%, 50%), transparent)" }}
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -57,7 +71,7 @@ const Hero = () => {
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
               <Sparkles className="w-4 h-4" />
-              Your Invisible AI Team
+              AI Automation Agency
             </span>
           </motion.div>
 
@@ -67,8 +81,8 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Transform Your Business with{" "}
-            <span className="gradient-text">AI Automation</span>
+            Become an AI‑First Business That {" "}
+            <span className="gradient-text">{text}</span>
           </motion.h1>
 
           <motion.p
@@ -77,8 +91,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Stop wasting time on repetitive tasks. We build custom AI agents that work 24/7, 
-            seamlessly integrate with your tools, and deliver measurable results.
+            Stop coaching the wrong people. Let our AI qualification system deliver your ideal clients straight to your calendar — every week, guaranteed.
           </motion.p>
 
           <motion.div
@@ -87,7 +100,6 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            {/* ✅ Opens Calendly link */}
             <Button
               asChild
               size="lg"
@@ -98,19 +110,18 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Start Automating
+                Get Qualified Leads
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
 
-            {/* ✅ Scrolls to Process section */}
             <Button
               size="lg"
               variant="outline"
               className="border-primary/50 text-foreground hover:bg-primary/10 text-lg px-8"
               onClick={() => scrollToSection("process")}
             >
-              See How It Works
+              Watch the System
             </Button>
           </motion.div>
         </div>
