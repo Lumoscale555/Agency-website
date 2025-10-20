@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Send, CheckCircle, MapPin, Clock, Twitter, Facebook, Instagram } from "lucide-react";
+import { Send, CheckCircle, Clock, Mail, Phone, Linkedin, Instagram, Facebook } from "lucide-react";
 import { send } from "@emailjs/browser";
 
 const ContactForm = () => {
@@ -72,7 +72,9 @@ const ContactForm = () => {
             <CheckCircle className="w-12 h-12 text-background" />
           </motion.div>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">Awesome! Your AI System Audit is Booked</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+            Awesome! Your AI System Audit is Booked
+          </h1>
           <p className="text-xl text-muted-foreground mb-10">
             We'll reach out soon to discuss how we can transform your business with AI automation.
           </p>
@@ -106,7 +108,7 @@ const ContactForm = () => {
         </p>
       </motion.div>
 
-      {/* FORM + CARDS */}
+      {/* FORM + INFO */}
       <div className="container mx-auto flex flex-col md:flex-row gap-8 w-full h-[70vh]">
         {/* LEFT SIDE: FORM */}
         <motion.div
@@ -125,7 +127,7 @@ const ContactForm = () => {
             <div className="grid md:grid-cols-2 gap-4">
               {/* NAME */}
               <div className="flex flex-col">
-                <label className="mb-1 font-semibold">Name</label>
+                <label className="mb-1 font-semibold">Name *</label>
                 <Input
                   placeholder="Enter your name"
                   value={formData.name}
@@ -139,7 +141,7 @@ const ContactForm = () => {
               <div className="flex flex-col">
                 <label className="mb-1 font-semibold">Website</label>
                 <Input
-                  placeholder="Optional"
+                  placeholder="Enter your website"
                   value={formData.website}
                   onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                   className="py-3 px-4 text-base"
@@ -148,7 +150,7 @@ const ContactForm = () => {
 
               {/* EMAIL */}
               <div className="flex flex-col">
-                <label className="mb-1 font-semibold">Email</label>
+                <label className="mb-1 font-semibold">Email *</label>
                 <Input
                   type="email"
                   placeholder="Enter your email"
@@ -163,7 +165,7 @@ const ContactForm = () => {
               <div className="flex flex-col">
                 <label className="mb-1 font-semibold">Company</label>
                 <Input
-                  placeholder="Optional"
+                  placeholder="Enter your company"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                   className="py-3 px-4 text-base"
@@ -173,7 +175,7 @@ const ContactForm = () => {
 
             {/* MESSAGE */}
             <div className="flex flex-col mt-4">
-              <label className="mb-1 font-semibold">Message</label>
+              <label className="mb-1 font-semibold">Message *</label>
               <Textarea
                 placeholder="Write your message..."
                 value={formData.message}
@@ -184,47 +186,99 @@ const ContactForm = () => {
               />
             </div>
 
-            <Button
-              type="submit"
-              disabled={sending || countdownIndex !== null}
-              className="mt-4 w-full flex items-center justify-center bg-gradient-to-r from-primary to-secondary text-background font-bold"
+            {/* ANIMATED BUTTON */}
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="mt-4"
             >
-              {countdownIndex !== null ? countdownItems[countdownIndex] : sending ? "Sending..." : "Send Message"}
-              {countdownIndex === null && !sending && <Send className="ml-2 w-4 h-4" />}
-            </Button>
+              <Button
+                type="submit"
+                disabled={sending || countdownIndex !== null}
+                className="w-full flex items-center justify-center bg-gradient-to-r from-primary to-secondary text-background font-bold overflow-hidden relative"
+              >
+                {countdownIndex !== null ? (
+                  countdownItems[countdownIndex]
+                ) : sending ? (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, repeat: Infinity, repeatType: "reverse" }}
+                  >
+                    Sending...
+                  </motion.div>
+                ) : (
+                  <>
+                    <span>Send Message</span>
+                    <motion.span
+                      initial={{ x: 0 }}
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
+                    >
+                      <Send className="ml-2 w-4 h-4" />
+                    </motion.span>
+                  </>
+                )}
+              </Button>
+            </motion.div>
           </motion.form>
         </motion.div>
 
-        {/* RIGHT SIDE: CARDS */}
+        {/* RIGHT SIDE: CONTACT + SOCIAL */}
         <motion.div
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
           className="flex-1 flex flex-col gap-6"
         >
-          <motion.div whileHover={{ scale: 1.05 }} className="bg-card border border-border rounded-2xl p-6 shadow-lg flex items-start gap-4">
-            <MapPin className="w-6 h-6 text-primary mt-1" />
-            <div>
-              <h3 className="font-bold">Address</h3>
-              <p>123 AI Street, Tech City, Country</p>
+          {/* CONTACT CARD */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-card border border-border rounded-2xl p-6 shadow-lg flex flex-col gap-3"
+          >
+            <h3 className="font-bold text-lg mb-2">Contact</h3>
+            <div className="flex items-center gap-3">
+              <Mail className="w-5 h-5 text-primary" />
+              <p>contact@lumoscale.com</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Phone className="w-5 h-5 text-primary" />
+              <div className="flex flex-col">
+                <span>+91 8919053970</span>
+                <span>+91 8074328526</span>
+              </div>
             </div>
           </motion.div>
 
-          <motion.div whileHover={{ scale: 1.05 }} className="bg-card border border-border rounded-2xl p-6 shadow-lg flex items-start gap-4">
+          {/* BUSINESS HOURS */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-card border border-border rounded-2xl p-6 shadow-lg flex items-start gap-4"
+          >
             <Clock className="w-6 h-6 text-primary mt-1" />
             <div>
               <h3 className="font-bold">Business Hours</h3>
-              <p>Mon-Fri: 9am - 6pm</p>
-              <p>Sat: 10am - 4pm</p>
+              <p>Mon–Sat: 9am – 7pm IST</p>
+              <p className="text-sm text-muted-foreground">We’re based in IST and serve clients globally 🌍</p>
             </div>
           </motion.div>
 
-          <motion.div whileHover={{ scale: 1.05 }} className="bg-card border border-border rounded-2xl p-6 shadow-lg flex flex-col gap-2">
+          {/* SOCIAL LINKS */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-card border border-border rounded-2xl p-6 shadow-lg flex flex-col gap-3"
+          >
             <h3 className="font-bold">Social</h3>
-            <div className="flex gap-3">
-              <a href="https://twitter.com"><Twitter className="w-6 h-6 text-primary" /></a>
-              <a href="https://facebook.com"><Facebook className="w-6 h-6 text-primary" /></a>
-              <a href="https://instagram.com"><Instagram className="w-6 h-6 text-primary" /></a>
+            <div className="flex gap-4">
+              <a href="https://www.linkedin.com/company/lumoscale" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="w-6 h-6 text-primary" />
+              </a>
+              <a href="https://www.instagram.com/lumoscale.ai/" target="_blank" rel="noopener noreferrer">
+                <Instagram className="w-6 h-6 text-primary" />
+              </a>
+              <a href="https://www.facebook.com/share/1Hwz9Yv69z/" target="_blank" rel="noopener noreferrer">
+                <Facebook className="w-6 h-6 text-primary" />
+              </a>
             </div>
           </motion.div>
         </motion.div>
